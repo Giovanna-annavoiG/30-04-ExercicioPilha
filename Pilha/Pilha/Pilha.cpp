@@ -77,23 +77,38 @@ void inicializar()
 void push()
 {
 	// aloca memoria dinamicamente para o novo elemento
-	NO* novo = (NO*)malloc(sizeof(NO));
-	if (novo == NULL)
+	NO* novo = (NO*)malloc(sizeof(NO)); //Criação do nó
+	if (novo == NULL) // Se nao tem memoria disponivel
 	{
-		return;
+		cout << "Erro: Memória insuficiente para criar um novo elemento." << endl;
+		return; // Retorna sem fazer nada
 	}
 
-	cout << "Digite o elemento: ";
-	cin >> novo->valor;
-	novo->prox = NULL;
-
+	cout << "Digite o elemento: "; //Usuario insere o valor
+	cin >> novo->valor; // pega o que o usuario colocou e guarda na variavel valor
+	novo->prox = NULL; //ultimo da pilha
+	novo->prox = topo; //define o proximo elemento como o topo atual
+	topo = novo; // colocar o novo como o topo
+	cout << "Elemento adicionado com sucesso!" << endl;
 
 }
 
 void pop()
 {
-
-	
+	// Primeiro passo: Verficar se a lista está vazia
+	if (topo == NULL)
+	{
+		cout << "Pilha vazia. Nada para remover." << endl;
+		return; //Se estiver vazia retorna sem fazer nada.
+	}
+	// Segundo passo: Acessar o nó que será removido
+	NO* paraRemover = topo;
+	// Terceiro passo: Mover o topo para o prox, 
+	topo = topo->prox;
+	// Quarto passo: Mostra ao usuário qual elemento vai ser removido
+	cout << "Elemento removido: " << paraRemover->valor << endl;
+	// Quinto passo: Liberar a memoria do nó que foi removido
+	free(paraRemover);
 
 }
 
